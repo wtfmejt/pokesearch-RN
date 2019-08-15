@@ -16,7 +16,13 @@ class Search extends React.Component {
   searchPoke = () => {
     this.setState({ onCall: true });
     let self = this;
-    axios
+
+    let input = this.state.pokeSearch.toLowerCase();
+
+    if(input == null || input == ''){
+      console.log("blank field")
+    }else{
+      axios
       .get(
         "https://pokeapi.co/api/v2/pokemon/" +
           this.state.pokeSearch.toLowerCase()
@@ -28,6 +34,10 @@ class Search extends React.Component {
       })
       .catch(err => console.log(err));
   };
+    }
+
+
+    
 
   renderBody = () => {
     if (this.state.onCall) {

@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import { ListItem, List } from "native-base";
 
+let backgroundImage = require("../assets/icons/raids_loading.png");
+
+
 let height = Dimensions.get("window").height;
 let width = Dimensions.get("window").width;
 
@@ -21,7 +24,7 @@ class SearchBody extends React.Component {
     return (
       <ImageBackground
         style={styles.backgroundImage}
-        source={{ uri: "http://pokemongolive.com/img/posts/raids_loading.png" }}
+        source={backgroundImage}
       >
         <ScrollView style={{ flex: 1 }}>
           <Text style={styles.header}>
@@ -59,6 +62,37 @@ class SearchBody extends React.Component {
               )}
               keyExtractor={(item, index) => index.toString()}
             />
+
+            <ListItem itemDivider>
+              <Text style={{ fontWeight: "bold" }}>Held Items</Text>
+            </ListItem>
+
+            <List 
+            dataArray={pokemon.held_items}
+            renderRow={item => (
+              <ListItem key={item.item.name}>
+                <Text>{item.item.name}</Text>
+              </ListItem>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            />
+
+            <ListItem itemDivider>
+              <Text style={{ fontWeight: "bold" }}>Moves</Text>
+            </ListItem>
+
+            <List 
+            dataArray={pokemon.moves}
+            renderRow={item => (
+              <ListItem key={item.move.name}>
+                <Text>{item.move.name}</Text>
+              </ListItem>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            />
+            
+
+
           </View>
         </ScrollView>
       </ImageBackground>
